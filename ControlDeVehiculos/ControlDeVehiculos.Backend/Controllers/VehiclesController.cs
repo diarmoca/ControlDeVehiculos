@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using ControlDeVehiculos.Backend.Models;
-using ControlDeVehiculos.Common.Models;
+﻿
+
 
 namespace ControlDeVehiculos.Backend.Controllers
 {
+    using System.Data.Entity;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using ControlDeVehiculos.Backend.Models;
+    using ControlDeVehiculos.Common.Models;
+    using System.Linq;
     public class VehiclesController : Controller
     {
         private LocalDataContext db = new LocalDataContext();
@@ -19,7 +17,7 @@ namespace ControlDeVehiculos.Backend.Controllers
         // GET: Vehicles
         public async Task<ActionResult> Index()
         {
-            return View(await db.Vehicles.ToListAsync());
+            return View(await this.db.Vehicles.OrderBy(p => p.FechaFinal).ToListAsync());
         }
 
         // GET: Vehicles/Details/5
@@ -48,7 +46,7 @@ namespace ControlDeVehiculos.Backend.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Marca,Tipo,Color,Modelo,NoPlacas,NoSerie,Resguardante,Cargo,Adscripcion,NoAvPrevia,NoExpediente,Origen,FechaInicio,FechaFinal")] Vehicle vehicle)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Marca,ImagePath,Tipo,Color,Modelo,NoPlacas,NoSerie,Resguardante,Cargo,Adscripcion,NoAvPrevia,NoExpediente,Origen,FechaInicio,FechaFinal")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +78,7 @@ namespace ControlDeVehiculos.Backend.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Marca,Tipo,Color,Modelo,NoPlacas,NoSerie,Resguardante,Cargo,Adscripcion,NoAvPrevia,NoExpediente,Origen,FechaInicio,FechaFinal")] Vehicle vehicle)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Marca,ImagePath,Tipo,Color,Modelo,NoPlacas,NoSerie,Resguardante,Cargo,Adscripcion,NoAvPrevia,NoExpediente,Origen,FechaInicio,FechaFinal")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {

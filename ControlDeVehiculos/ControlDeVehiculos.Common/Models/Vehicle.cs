@@ -63,8 +63,8 @@ namespace ControlDeVehiculos.Common.Models
         [Display(Name = "Fecha que concluye el reguardo")]
         public DateTime FechaFinal { get; set; }
 
-        // [Display(Name = "Foto")]
-        // public string ImagePath { get; set; }
+        [Display(Name = "Image")]
+        public string ImagePath { get; set; }
 
         //[NotMapped]
         // public byte[] ImageArray { get; set; }

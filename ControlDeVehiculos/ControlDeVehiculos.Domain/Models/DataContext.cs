@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ControlDeVehiculos.Domain.Models
+﻿namespace ControlDeVehiculos.Domain.Models
 {
-    using System.Data.Entity;
     using ControlDeVehiculos.Common.Models;
+    using System.Data.Entity;
     public class DataContext : DbContext
     {
         public DataContext() : base("DefaultConnection")
@@ -15,6 +9,6 @@ namespace ControlDeVehiculos.Domain.Models
 
         }
 
-        public System.Data.Entity.DbSet<ControlDeVehiculos.Common.Models.Vehicle> Vehicles { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
     }
 }
