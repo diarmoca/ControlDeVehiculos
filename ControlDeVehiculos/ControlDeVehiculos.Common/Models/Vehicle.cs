@@ -69,7 +69,7 @@ namespace ControlDeVehiculos.Common.Models
         //[NotMapped]
         // public byte[] ImageArray { get; set; }
 
-        /* public String ImageFullPath
+         public String ImageFullPath
          {
              get
              {
@@ -78,10 +78,10 @@ namespace ControlDeVehiculos.Common.Models
                      var imgDefault = "VehiclesDBA.png";
                      return imgDefault;
                  }
-                 var image = $"https://dbavehiclesapi.azurewebsites.net{this.ImagePath.Substring(1)}";
+                 var image = $"https://controldevehiculosbackend.azurewebsites.net{this.ImagePath.Substring(1)}";
                  return image.ToString();
              }
-         }*/
+         }
 
         public string ConverDateEnd
          {

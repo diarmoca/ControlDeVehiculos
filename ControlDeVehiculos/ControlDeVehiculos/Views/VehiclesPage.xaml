@@ -7,6 +7,9 @@
              x:Class="ControlDeVehiculos.Views.VehiclesPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Resguardo de Vehículos">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="ic_action_add_box" Command="{Binding NewVehicleCommand}"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout
                 BindingContext="{Binding Vehicles}"
@@ -29,6 +32,11 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
+                                <Image Grid.RowSpan="2"
+                                         Source="{Binding ImageFullPath}"
+                                         Aspect="AspectFill"
+                                         HeightRequest="60"
+                                         WidthRequest="90" />
                                 <Label Grid.Column="1"
                                        Text="{Binding Resguardante}"
                                        FontSize="Subtitle"

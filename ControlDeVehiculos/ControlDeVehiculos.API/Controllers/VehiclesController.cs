@@ -21,7 +21,7 @@ namespace ControlDeVehiculos.API.Controllers
         // GET: api/Vehicles
         public IQueryable<Vehicle> GetVehicles()
         {
-            return db.Vehicles;
+            return this.db.Vehicles.OrderBy(p => p.FechaFinal);
         }
 
         // GET: api/Vehicles/5

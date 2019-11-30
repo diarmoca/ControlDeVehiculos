@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ControlDeVehiculos.Views.NewVehiclePage"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Nuevo Resguardo">
+    <ContentPage.Content>
+        <ScrollView
+            BindingContext="{Binding NewVehicle}">
+            <StackLayout 
+            Padding="5">
+                <Image
+                    Source="{Binding ImageSource}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label
+                FontSize="Small"
+                HorizontalOptions="Center"
+                Text="Toca la imagen para cambiarla">
+                </Label>
+                <StackLayout>
+                    <Label
+                            FontSize="Body"
+                            FontAttributes="Bold"
+                            Text="Marca">
+                    </Label>
+                    <Entry x:Name="txtMarca"
+                        Text="{Binding Marca}"
+                            Placeholder="Marca del vehículo">
+                    </Entry>
+                    <Label
+                            FontSize="Body"
+                            FontAttributes="Bold"
+                            Text="Tipo">
+                    </Label>
+                    <Entry Text="{Binding Tipo}"
+                            Placeholder="Tipo del vehículo"
+                           >
+                    </Entry>
+                    <Label
+                            FontSize="Body"
+                            FontAttributes="Bold"
+                            Text="Color">
+                    </Label>
+                    <Entry Text="{Binding Color}"
+                            Placeholder="Color del vehículo"
+                            >
+                    </Entry>
+                    <Label
+                            FontSize="Body"
+                            FontAttributes="Bold"
+                            Text="Modelo">
+                    </Label>
+                    <Entry x:Name="txtModelo"
+                            Text="{Binding Modelo}"
+                            Keyboard="Numeric"
+                            Placeholder="Modelo del vehículo">
+                    </Entry>
+                    <Label
+                            FontSize="Body"
+                            FontAttributes="Bold"
+                            Text="No de Placa">
+                    </Label>
+                    <Entry Text="{Binding NoPlacas}"
+                            Placeholder="No. de placa">
+                    </Entry>
+                    <Label
+                            FontSize="Body"
+                            FontAttributes="Bold"
+                            Text="No de Serire">
+                    </Label>
+                    <Entry Text="{Binding NoSerie}"
+                            Placeholder="No de Serie">
+                    </Entry>
+                    <Label
+                            FontSize="Body"
+                            FontAttributes="Bold"
+                            Text="Nombre Resguardante">
+                    </Label>
+                    <Entry Text="{Binding NombreResguardante}"
+                            Placeholder="Nombre Completo del Resguardante">
+                    </Entry>
+                    <Label
+                            FontSize="Body"
+                            FontAttributes="Bold"
+                            Text="Cargo del Resguardante">
+                    </Label>
+                    <Entry Text="{Binding CargoDelResguardante}"
+                            Placeholder="Puesto o Cargo del Resguardante">
+                    </Entry>
+                    <Label
+                            FontSize="Body"
+                            FontAttributes="Bold"
+                            Text="Adscripcion del Resguardante">
+                    </Label>
+                    <Entry Text="{Binding AdscripcionResguardante}"
+                            Placeholder="Lugar de Adscripción del Resguardante">
+                    </Entry>
+                    <Label
+                            FontSize="Body"
+                            FontAttributes="Bold"
+                            Text="No. de Averigución del Vehículo">
+                    </Label>
+                    <Entry Text="{Binding NoAvePrevia}"
+                            Placeholder="No. de Averigución del Vehículo">
+                    </Entry>
+                    <Label
+                            FontSize="Body"
+                            FontAttributes="Bold"
+                            Text="No de Expediente DBA">
+                    </Label>
+                    <Entry Text="{Binding NoExpdienteDBA}"
+                            Placeholder="No Expediente DBA">
+                    </Entry>
+                    <Label
+                            FontSize="Body"
+                            FontAttributes="Bold"
+                            Text="Origen">
+                    </Label>
+                    <Entry Text="{Binding Origen}"
+                            Placeholder="Origen">
+                    </Entry>
+                    <Label
+                            FontSize="Body"
+                            FontAttributes="Bold"
+                            Text="Fecha de Inicio del Resguardo">
+                    </Label>
+                    <DatePicker x:Name="dtpFechaInicial"
+                                DateSelected="dtpFechaInicial_DateSelected"
+                                Date="{Binding FechaInicio}"
+                                 >
+                    </DatePicker>
+                    <Label
+                            FontSize="Body"
+                            FontAttributes="Bold"
+                            Text="Fecha Finaliza es Resgurdo">
+                    </Label>
+                    <DatePicker x:Name="dtpFechaFinal"
+                        Date="{Binding FechaTermina}">
+                    </DatePicker>
+                </StackLayout>
+                <ActivityIndicator
+                VerticalOptions="CenterAndExpand"
+                    IsRunning="{Binding IsRunning}">
+
+                </ActivityIndicator>
+                <Button
+                Text="Guardar"
+                Command="{Binding SaveCommand}"
+                BackgroundColor="DarkBlue"
+                TextColor="White"
+                CornerRadius="23"
+                IsEnabled="{Binding IsEnabled}"
+                >
+
+                </Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -11,7 +11,7 @@ namespace ControlDeVehiculos
         {
             InitializeComponent();
 
-            MainPage = new VehiclesPage();
+            MainPage = new NavigationPage (new VehiclesPage());
         }
 
         protected override void OnStart()
