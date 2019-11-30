@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ControlDeVehiculos.App"
+             xmlns:infre ="clr-namespace:ControlDeVehiculos.Infrastructure">
+    <Application.Resources>
+        <ResourceDictionary>
+            <!-- Locator -->
+            <infre:InstanceLocator x:Key="Locator"/>
+
+            <!-- Parameter -->
+            <x:String x:Key="UrlAPI">https://controldevehiculosapi.azurewebsites.net</x:String>
+            <x:String x:Key="UrlPrefix">/api</x:String>
+            <x:String x:Key="UrlVehiclesController">/Vehicles</x:String>
+            <x:String x:Key="UrlPing">google.com</x:String>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

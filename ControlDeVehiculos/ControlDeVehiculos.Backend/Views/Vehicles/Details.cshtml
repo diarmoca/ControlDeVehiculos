@@ -1,0 +1,130 @@
+﻿@model ControlDeVehiculos.Common.Models.Vehicle
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Vehicle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Marca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Marca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Color)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Color)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoPlacas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoPlacas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoSerie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoSerie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Resguardante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Resguardante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cargo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cargo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Adscripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adscripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoAvPrevia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoAvPrevia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoExpediente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoExpediente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Origen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Origen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaInicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaFinal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaFinal)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
