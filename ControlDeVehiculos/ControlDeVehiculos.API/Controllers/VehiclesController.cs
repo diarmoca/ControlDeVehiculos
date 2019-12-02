@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using ControlDeVehiculos.API.Helpers;
 using ControlDeVehiculos.Common.Models;
 using ControlDeVehiculos.Domain.Models;
 
@@ -46,9 +48,27 @@ namespace ControlDeVehiculos.API.Controllers
                 return BadRequest(ModelState);
             }
 
+            
+
             if (id != vehicle.Id)
             {
                 return BadRequest();
+            }
+
+            if (vehicle.ImageArray != null && vehicle.ImageArray.Length > 0)
+            {
+                var stream = new MemoryStream(vehicle.ImageArray);
+                var guid = Guid.NewGuid().ToString();
+                var file = $"{guid}.jpg";
+                var folder = "~/Content/Vehicles";
+                var fullpath = $"{folder}/{file}";
+                var response = FilesHelper.UploadPhoto(stream, folder, file);
+
+                if (response)
+                {
+                    vehicle.ImagePath = fullpath;
+                }
+
             }
 
             db.Entry(vehicle).State = EntityState.Modified;
@@ -69,7 +89,7 @@ namespace ControlDeVehiculos.API.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(vehicle);
         }
 
         // POST: api/Vehicles
@@ -79,6 +99,22 @@ namespace ControlDeVehiculos.API.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+
+            if (vehicle.ImageArray != null && vehicle.ImageArray.Length > 0)
+            {
+                var stream = new MemoryStream(vehicle.ImageArray);
+                var guid = Guid.NewGuid().ToString();
+                var file = $"{guid}.jpg";
+                var folder = "~/Content/Vehicles";
+                var fullpath = $"{folder}/{file}";
+                var response = FilesHelper.UploadPhoto(stream, folder, file);
+
+                if (response)
+                {
+                    vehicle.ImagePath = fullpath;
+                }
+
             }
 
             db.Vehicles.Add(vehicle);

@@ -3,8 +3,10 @@
     using ControlDeVehiculos.Common.Models;
     using ControlDeVehiculos.Services;
     using GalaSoft.MvvmLight.Command;
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Linq;
     using System.Windows.Input;
     using Xamarin.Forms;
     public class VehiclesViewModel : BaseViewModel
@@ -16,11 +18,13 @@
 
         private bool isRefreshing;
 
-        private ObservableCollection<Vehicle> vehicles;
+        private ObservableCollection<VehiclesItemViewModel> vehicles;
         #endregion
 
         #region Properties
-        public ObservableCollection<Vehicle> Vehicles
+
+        public List<Vehicle> MyVehicles { get; set; }
+        public ObservableCollection<VehiclesItemViewModel> Vehicles
         {
             get { return this.vehicles; }
             set { this.SetValue(ref this.vehicles, value); }
@@ -34,13 +38,32 @@
                 this.SetValue(ref this.isRefreshing, value);
             }
         }
+
+
+        #endregion
+
+        #region Constructors
         public VehiclesViewModel()
         {
-          //  instance = this;
+            instance = this;
             this.apiService = new ApiService();
             this.LoadVehicles();
-        }
+        } 
+        #endregion
 
+        #region Singleton
+
+        private static VehiclesViewModel instance;
+
+        public static VehiclesViewModel GetInstance()
+        {
+            if (instance == null)
+            {
+                return new VehiclesViewModel();
+            }
+
+            return instance;
+        }
         #endregion
 
         #region Methods
@@ -68,10 +91,37 @@
                 return;
             }
 
-            var list = (List<Vehicle>)response.Result;
-            this.Vehicles = new ObservableCollection<Vehicle>(list);
+            this.MyVehicles = (List<Vehicle>)response.Result;
+            this.RefreshList();
             this.IsRefreshing = false;
 
+        }
+
+        public void RefreshList()
+        {
+            var myListVehiclesItemViewModel = this.MyVehicles.Select(v => new VehiclesItemViewModel
+            {
+                Id = v.Id,
+                Marca = v.Marca,
+                Tipo = v.Tipo,
+                Color = v.Color,
+                Modelo = v.Modelo,
+                NoPlacas = v.NoPlacas,
+                NoSerie = v.NoSerie,
+                Resguardante = v.Resguardante,
+                Cargo = v.Cargo,
+                Adscripcion = v.Adscripcion,
+                NoAvPrevia = v.NoAvPrevia,
+                NoExpediente = v.NoExpediente,
+                Origen = v.Origen,
+                FechaInicio = v.FechaInicio,
+                FechaFinal = v.FechaFinal,
+                ImageArray = v.ImageArray,
+                ImagePath = v.ImagePath,
+            });
+
+            this.Vehicles = new ObservableCollection<VehiclesItemViewModel>(
+                myListVehiclesItemViewModel.OrderBy(v => v.FechaFinal));
         }
         #endregion
 

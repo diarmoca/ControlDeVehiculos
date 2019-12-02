@@ -23,6 +23,10 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Editar" Command="{Binding EditVehicleCommand}"/>
+                                <MenuItem Text="Eliminar" Command="{Binding DeleteVehicleCommand}" IsDestructive="True"/>
+                            </ViewCell.ContextActions>
                             <Grid Padding="5">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />

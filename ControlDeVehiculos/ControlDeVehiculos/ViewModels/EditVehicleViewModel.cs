@@ -1,20 +1,21 @@
-﻿
-
-namespace ControlDeVehiculos.ViewModels
+﻿namespace ControlDeVehiculos.ViewModels
 {
-    using System;
-    using System.Windows.Input;
-    using Services;
+
+    using Common.Models;
+    using ControlDeVehiculos.Helpers;
+    using ControlDeVehiculos.Services;
     using GalaSoft.MvvmLight.Command;
-    using Xamarin.Forms;
-    using ControlDeVehiculos.Common.Models;
     using Plugin.Media;
     using Plugin.Media.Abstractions;
-    using ControlDeVehiculos.Helpers;
+    using System.Linq;
+    using System.Windows.Input;
+    using Xamarin.Forms;
 
-    public class NewVehicleViewModel : BaseViewModel
+    public class EditVehicleViewModel : BaseViewModel
     {
         #region Attributes
+        private Vehicle vehicle;
+
         private MediaFile file;
 
         private ImageSource imageSource;
@@ -24,39 +25,18 @@ namespace ControlDeVehiculos.ViewModels
         private bool isRunning;
 
         private bool isEnabled;
-
         #endregion
 
         #region Properties
-        public string Marca { get; set; }
 
-        public string Tipo { get; set; }
-
-        public string Color { get; set; }
-
-        public int Modelo { get; set; }
-
-        public string NoPlacas { get; set; }
-
-        public string NoSerie { get; set; }
-
-        public string NombreResguardante { get; set; }
-
-        public string CargoDelResguardante { get; set; }
-
-        public string AdscripcionResguardante { get; set; }
-
-        public string NoAvePrevia { get; set; }
-
-        public string NoExpdienteDBA { get; set; }
-
-        public string Origen { get; set; }
-
-        public DateTime FechaInicio { get; set; }
-
-        public DateTime FechaTermina { get; set; }
-
-        public string ImagePath { get; set; }
+        public Vehicle Vehicle
+        {
+            get
+            {
+                return this.vehicle;
+            }
+            set { this.SetValue(ref this.vehicle, value); }
+        }
 
         public bool IsRunning
         {
@@ -93,20 +73,19 @@ namespace ControlDeVehiculos.ViewModels
                 this.SetValue(ref this.imageSource, value);
             }
         }
-
         #endregion
 
 
-        #region Constructors
 
-        public NewVehicleViewModel()
+
+        #region Constructors
+        public EditVehicleViewModel(Vehicle vehicle)
         {
+            this.vehicle = vehicle;
             this.apiService = new ApiService();
             this.IsEnabled = true;
-            this.ImageSource = "VehiclesDBA";
-
+            this.ImageSource = vehicle.ImageFullPath;
         }
-
         #endregion
 
         #region Commands
@@ -173,72 +152,67 @@ namespace ControlDeVehiculos.ViewModels
 
         private async void Save()
         {
-            if (string.IsNullOrEmpty(this.Marca))
+            if (string.IsNullOrEmpty(this.Vehicle.Marca))
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Debe ingresar la marca del Vehículo", "Aceptar");
                 return;
             }
-            if (string.IsNullOrEmpty(this.Tipo))
+            if (string.IsNullOrEmpty(this.Vehicle.Tipo))
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Debe ingresar el Tipo del Vehículo", "Aceptar");
                 return;
             }
-            if (string.IsNullOrEmpty(this.Color))
+            if (string.IsNullOrEmpty(this.Vehicle.Color))
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Debe ingresar el Color del Vehículo", "Aceptar");
                 return;
             }
-            if (string.IsNullOrWhiteSpace(this.Modelo.ToString()) || this.Modelo == 0 || this.Modelo.ToString().Length < 4)
+            if (string.IsNullOrWhiteSpace(this.Vehicle.Modelo.ToString()) || this.Vehicle.Modelo == 0 || this.Vehicle.Modelo.ToString().Length < 4)
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Debe ingresar el Modelo correcto del Vehículo", "Aceptar");
                 return;
             }
-            if (string.IsNullOrEmpty(this.NoPlacas))
+            if (string.IsNullOrEmpty(this.Vehicle.NoPlacas))
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Debe el No. de placas del Vehículo", "Aceptar");
                 return;
             }
-            if (string.IsNullOrEmpty(this.NoSerie))
+            if (string.IsNullOrEmpty(this.Vehicle.NoSerie))
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Debe ingresar el No. de serie del Vehículo", "Aceptar");
                 return;
             }
-            if (string.IsNullOrEmpty(this.NombreResguardante))
+            if (string.IsNullOrEmpty(this.Vehicle.Resguardante))
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Debe ingresar el Nombre Completo del resguardante", "Aceptar");
                 return;
             }
-            if (string.IsNullOrEmpty(this.CargoDelResguardante))
+            if (string.IsNullOrEmpty(this.Vehicle.Cargo))
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Debe ingresar el cargo o puesto del Resguardante", "Aceptar");
                 return;
             }
-            if (string.IsNullOrEmpty(this.AdscripcionResguardante))
+            if (string.IsNullOrEmpty(this.Vehicle.Adscripcion))
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Debe ingresar la Adscripción del resguardante", "Aceptar");
                 return;
             }
-            if (string.IsNullOrEmpty(this.NoAvePrevia))
+            if (string.IsNullOrEmpty(this.Vehicle.NoAvPrevia))
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Debe ingresar No Averiguación Previa", "Aceptar");
                 return;
             }
-            if (string.IsNullOrEmpty(this.NoExpdienteDBA))
+            if (string.IsNullOrEmpty(this.Vehicle.NoExpediente))
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Debe ingresar No Expendiente DBA", "Aceptar");
                 return;
             }
-            if (string.IsNullOrEmpty(this.Origen))
+            if (string.IsNullOrEmpty(this.Vehicle.Origen))
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Debe ingresar el Origen", "Aceptar");
                 return;
             }
 
-            if (FechaTermina <= FechaInicio )
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", "La Fecha Final no puede ser Menor o Igual a la Fecha de Inicio", "Aceptar");
-                return;
-            }
 
             this.IsRunning = true;
             this.IsEnabled = false;
@@ -256,31 +230,13 @@ namespace ControlDeVehiculos.ViewModels
             if (this.file != null)
             {
                 imageArray = FilesHelpers.ReadFully(this.file.GetStream());
+                this.Vehicle.ImageArray = imageArray;
             }
-            var vehicle = new Vehicle
-            {
-                //id = "0000000258", //(apiService.tr + 1).ToString("0000000000"),
-                Marca = this.Marca,
-                Tipo = this.Tipo,
-                Color = this.Color,
-                Modelo = this.Modelo,
-                NoPlacas = this.NoPlacas,
-                NoSerie = this.NoSerie,
-                Resguardante = this.NombreResguardante,
-                Cargo = this.CargoDelResguardante,
-                Adscripcion = this.AdscripcionResguardante,
-                NoAvPrevia = this.NoAvePrevia,
-                NoExpediente = this.NoExpdienteDBA,
-                Origen = this.Origen,
-                FechaInicio = this.FechaInicio,
-                FechaFinal = this.FechaTermina,
-                ImageArray = imageArray,
-            };
 
             var url = Application.Current.Resources["UrlAPI"].ToString();
             var prefix = Application.Current.Resources["UrlPrefix"].ToString();
             var vController = Application.Current.Resources["UrlVehiclesController"].ToString();
-            var response = await this.apiService.Post(url, prefix, vController, vehicle);
+            var response = await this.apiService.Put(url, prefix, vController,this.Vehicle,this.Vehicle.Id);
 
             if (!response.IsSuccess)
             {
@@ -289,9 +245,16 @@ namespace ControlDeVehiculos.ViewModels
                 await Application.Current.MainPage.DisplayAlert("Error", response.Message, "Aceptar");
                 return;
             }
-             
+
             var newVehicle = (Vehicle)response.Result;
             var vehiclesViewModel = VehiclesViewModel.GetInstance();
+
+            var oldVehicle = vehiclesViewModel.MyVehicles.Where(v => v.Id == this.Vehicle.Id).FirstOrDefault();
+            if(oldVehicle != null)
+            {
+                vehiclesViewModel.MyVehicles.Remove(oldVehicle);
+            }
+
             vehiclesViewModel.MyVehicles.Add(newVehicle);
             vehiclesViewModel.RefreshList();
 
@@ -299,7 +262,7 @@ namespace ControlDeVehiculos.ViewModels
             this.IsEnabled = true;
             await Application.Current.MainPage.Navigation.PopAsync();
 
-             
+
 
 
 

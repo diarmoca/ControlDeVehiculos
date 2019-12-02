@@ -66,8 +66,8 @@ namespace ControlDeVehiculos.Common.Models
         [Display(Name = "Image")]
         public string ImagePath { get; set; }
 
-        //[NotMapped]
-        // public byte[] ImageArray { get; set; }
+        [NotMapped]
+        public byte[] ImageArray { get; set; }
 
          public String ImageFullPath
          {
@@ -78,7 +78,7 @@ namespace ControlDeVehiculos.Common.Models
                      var imgDefault = "VehiclesDBA.png";
                      return imgDefault;
                  }
-                 var image = $"https://controldevehiculosbackend.azurewebsites.net{this.ImagePath.Substring(1)}";
+                 var image = $"https://controldevehiculosapi.azurewebsites.net{this.ImagePath.Substring(1)}";
                  return image.ToString();
              }
          }
