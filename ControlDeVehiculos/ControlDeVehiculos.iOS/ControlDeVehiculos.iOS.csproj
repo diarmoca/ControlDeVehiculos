@@ -139,4 +139,10 @@
   <ItemGroup>
     <BundleResource Include="Resources\ic_action_add_box.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_chevron_right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\editar.png" />
+  </ItemGroup>
 </Project>

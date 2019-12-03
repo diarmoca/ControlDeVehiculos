@@ -9,7 +9,8 @@
              Title="Nuevo Resguardo">
     <ContentPage.Content>
         <ScrollView
-            BindingContext="{Binding NewVehicle}">
+            BindingContext="{Binding NewVehicle}"
+            BackgroundColor="AntiqueWhite">
             <StackLayout 
             Padding="5">
                 <Image

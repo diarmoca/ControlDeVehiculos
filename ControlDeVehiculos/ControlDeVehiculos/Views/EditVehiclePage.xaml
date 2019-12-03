@@ -9,7 +9,8 @@
              Title="Editar Resguardo">
     <ContentPage.Content>
         <ScrollView
-            BindingContext="{Binding EditVehicle}">
+            BindingContext="{Binding EditVehicle}"
+            BackgroundColor="AntiqueWhite">
             <StackLayout 
             Padding="5">
                 <Image

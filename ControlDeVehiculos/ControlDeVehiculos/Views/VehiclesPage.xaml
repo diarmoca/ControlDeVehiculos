@@ -13,13 +13,15 @@
     <ContentPage.Content>
         <StackLayout
                 BindingContext="{Binding Vehicles}"
-                Padding="10">
+                Padding="5"
+                BackgroundColor="#3D3E3E">
             <ListView 
                     HasUnevenRows="True"
                     IsRefreshing="{Binding IsRefreshing}"
                     RefreshCommand="{Binding RefreshCommand}"
                     IsPullToRefreshEnabled="True"
-                    ItemsSource="{Binding Vehicles}">
+                    ItemsSource="{Binding Vehicles}"
+                    BackgroundColor="#3D3E3E">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -31,31 +33,76 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Image Grid.RowSpan="2"
-                                         Source="{Binding ImageFullPath}"
-                                         Aspect="AspectFill"
-                                         HeightRequest="60"
-                                         WidthRequest="90" />
-                                <Label Grid.Column="1"
-                                       Text="{Binding Resguardante}"
-                                       FontSize="Subtitle"
-                                       FontAttributes="Bold"
-                                       VerticalOptions="EndAndExpand"/>
-                                <Label Grid.Row="1"
-                                       Grid.Column="1"
-                                       FontSize="Caption"
-                                       Text="{Binding Tipo}"
-                                       VerticalOptions="End" />
-                                <Label Grid.Row="1"
-                                       Grid.Column="1"
-                                       Text= "{Binding ConverDateEnd }"
-                                       VerticalOptions="EndAndExpand"
-                                       HorizontalOptions="End"/>
+                                        <Label    
+                                                   Grid.Column="0"
+                                                   Grid.Row="0" 
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"
+                                                   Text="{Binding Resguardante}"
+                                                   FontSize="Subtitle"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#05ACCD"
+                                                   Padding="1"/>        
+                                        <Label 
+                                                   Grid.Row="1"
+                                                    Grid.Column="0"
+                                                   FontSize="Caption"
+                                                   Text="{Binding Marca}"
+                                                   FontAttributes="Bold"
+                                                   TextColor="White"
+                                                   HorizontalOptions="CenterAndExpand"/>
+                                        <Label 
+                                                   Grid.Row="2"
+                                                  Grid.Column="0"
+                                                   FontSize="Caption"
+                                                   Text="{Binding Tipo}"
+                                                   TextColor="White"
+                                                   HorizontalOptions="Center"/>
+                                        <Image 
+                                                 Grid.Row="3"      
+                                                 Grid.Column="0"
+                                                 Source="{Binding ImageFullPath}"
+                                                 Aspect="Fill"
+                                                 HeightRequest="300"
+                                                 WidthRequest="300"/>
+                                <StackLayout Grid.Row="4" Grid.Column="0">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        
+
+                                         <Label 
+                                                   Grid.Column="0"
+                                                   Grid.Row="0" 
+                                                   TextColor="#FF4081"
+                                                   FontSize="16"
+                                                   FontAttributes="Bold"
+                                                   Text= "{Binding ConverDateEnd }"
+                                                   VerticalOptions="CenterAndExpand"
+                                                   HorizontalOptions="End"
+                                                    Padding="1"/>
+                                        <Image 
+                                                 Grid.Column="1"
+                                                 Grid.Row="0" 
+                                                 Source="editar" 
+                                                 Aspect="Fill"
+                                                 VerticalOptions="End"
+                                                 HorizontalOptions="End"
+                                                 WidthRequest="50"
+                                                 HeightRequest="50">
+                                            
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding EditVehicleCommand}" />
+                                        </Image.GestureRecognizers>
+                                        </Image>
+                                    </Grid>
+                                </StackLayout>
 
                             </Grid>
 
